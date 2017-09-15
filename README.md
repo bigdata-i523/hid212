@@ -5,8 +5,8 @@
 ```
 owner:
     hid: 212
-    name: 
-    url: 
+    name: Kumar, Saurabh 
+    url: https://github.com/bigdata-i523/hid212
 ```
 
 # Paper 1
@@ -14,13 +14,11 @@ owner:
 ```
 paper1:
    author: 
-   - Gregor von Laszewski
-   - Fugang Wang
+   - Kumar, Saurabh
    hid:
-   - 000
-   - 001
-   title: This is my paper about xyz
-   abstract: This paper showcases tis and that and the other
+   - 212
+   title: Big Data Analysis using MapReduce
+   abstract: With the amount of data created everyday reaching exorbitant limits and a push for analysis across all major fields gaining              traction, we need an advanced framework to analyze the large data. Hadoop is such a framework for developing distributed                applications. MapReduce is an application model for Hadoop. Word count is a small analysis that can be done using                        MapReduce. It can also be used for complex tasks like 'search'.
    url: https://github.com/bigdata-i523/sample-hid000/paper1/paper1.pdf
    type: latex
    
@@ -31,9 +29,9 @@ paper1:
 ```
 paper2:
    author: 
-   - Gregor von Laszewski
+   - Kumar, Saurabh
    hid:
-   - 000
+   - 212
    title: This is my paper about the other abc
    abstract: This paper showcases tis and that and the other in regards to abc
    url: https://github.com/bigdata-i523/sample-hid000/paper2/paper2.pdf   
