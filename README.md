@@ -24,7 +24,7 @@ paper1:
    also be used for complex tasks like 'search'.
    url: https://github.com/bigdata-i523/sample-hid000/paper1/paper1.pdf
    type: latex
-   
+   status: In progress
 ```
    
 # Paper 2
@@ -39,6 +39,7 @@ paper2:
    abstract: This paper showcases tis and that and the other in regards to abc
    url: https://github.com/bigdata-i523/sample-hid000/paper2/paper2.pdf   
    type: word
+   status: Not Started
 ```
 
 # Project 
