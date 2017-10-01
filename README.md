@@ -30,6 +30,7 @@ paper1:
    url: https://github.com/bigdata-i523/hid212/paper1/paper1.pdf
    type: latex
    status: In progress
+   chapter: Technology
 ```
    
 # Paper 2
