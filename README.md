@@ -27,9 +27,9 @@ paper1:
        Hadoop. Word count is a small analysis that can be done
        usingMapReduce. It can also be used for complex tasks like
        'search'.
-   url: https://github.com/bigdata-i523/hid212/paper1/paper1.pdf
+   url: https://github.com/bigdata-i523/hid212/paper1/report.pdf
    type: latex
-   status: In progress
+   status: Completed
    chapter: Technology
 ```
    
