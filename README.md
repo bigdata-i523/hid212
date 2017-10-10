@@ -29,7 +29,7 @@ paper1:
        'search'.
    url: https://github.com/bigdata-i523/hid212/paper1/report.pdf
    type: latex
-   status: Completed
+   status: 100%
    chapter: Technology
 ```
    
