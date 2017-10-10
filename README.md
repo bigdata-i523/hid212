@@ -29,7 +29,7 @@ paper1:
        'search'.
    url: https://github.com/bigdata-i523/hid212/paper1/report.pdf
    type: latex
-   status: 100%
+   status: 88% not compilable
    chapter: Technology
 ```
    
