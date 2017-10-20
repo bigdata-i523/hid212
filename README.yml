@@ -21,7 +21,13 @@ paper1:
     type: latex
     url: https://github.com/bigdata-i523/hid212/paper1/report.pdf
 paper2:
-    abstract: TBD
+    abstract: >
+        With increased resolution and quantity of images and videos stored everyday,
+        there is a need for better data storage techniques and processing for such data.
+        The algorithms for processing such exorbitant amount of data are usually complex
+        and require a lot of computation power. This forces the use of a distributed 
+        environment for better storage and faster computation using application model like
+        MapReduce.
     author:
         - Kumar, Saurabh
     hid:
