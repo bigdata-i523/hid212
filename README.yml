@@ -21,6 +21,7 @@ paper1:
     type: latex
     url: https://github.com/bigdata-i523/hid212/paper1/report.pdf
 paper2:
+    review: Nov 6 2017
     abstract: >
         With increased resolution and quantity of images and videos stored everyday,
         there is a need for better data storage techniques and processing for such data.
