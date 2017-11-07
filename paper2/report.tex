@@ -1,0 +1,188 @@
+\documentclass[sigconf]{acmart}
+
+\input{format/i523}
+
+\begin{document}
+\title{Can Blockchain mitigate the Opioid Crisis through more secure Drug Distribution?}
+
+
+\author{Saurabh Kumar}
+\affiliation{%
+  \institution{Indiana University}
+  \city{Bloomington} 
+  \state{IN} 
+  \postcode{47408}
+  \country{USA}}
+\email{kumarsau@iu.edu}
+
+\author{Mathew Schwartzer}
+\affiliation{%
+  \institution{Indiana University}
+  \city{Bloomington} 
+  \state{IN} 
+  \postcode{47408}
+  \country{USA}}
+\email{mabschwa@iu.edu}
+
+\author{Nicholas J Hotz}
+\affiliation{%
+  \institution{Indiana University}
+  \city{Bloomington} 
+  \state{IN} 
+  \postcode{47408}
+  \country{USA}}
+\email{nhotz@iu.edu}
+
+
+% The default list of authors is too long for headers}
+\renewcommand{\shortauthors}{G. v. Laszewski}
+
+
+\begin{abstract}
+Drugs are bad!
+\end{abstract}
+
+\keywords{HID 210, HID 212, HID225, i523, blockchain, opioid epidemic}
+
+
+\maketitle
+
+
+
+\section{Introduction}
+What is the opioid crisis?
+What is blockchain?
+How is blockchain currently being used
+What are the advantages and disadvantages of blockchain
+What are the industries and businesses most likely to be impacted
+What are some non-conventional applications for blockchain?
+
+ \cite{editor00}.
+
+\section{Blockchain Applications in Healthcare}
+NICK TO DO
+
+\section{Blockchain Applications in Supply Chain}
+Blockchain, being a public ledger, can be used in different domains with slight variation in its core attributes. While the general implementation says that the data of a single block is public to all the nodes, different sets of access rights could be provided to different classes of users.  Such implementation of blockchain could be applied to the supply chain network. 
+
+
+
+\subsection{Supply Chain Requirement}
+A supply chain requires the involvement of various parties helping each other. This is generally a one to one chain network. Often, each agency use different technologies for record keeping. Record keeping could involve any information ranging from direct communications to logistics. Trust is an important issue between agencies. Most of the agencies in a supply chain keep individual records, which are not public to other agencies in the supply chain. There are some information that are shared between agencies like contracts and other notarized data. An efficient management of such  shared data can be done using a blockchain. The blockchain provides the ability to collect, record and notarize different types of shared data\cite{arbc1}. 
+
+\subsection{Features Provided by Blockchain}
+Blockchain could also facilitate storing and maintaining logistics data. Such an application could be useful in the field of health care, where the government wants to monitor the supply of drugs. An ideal scenario for this would be to prevent events like the opioid crisis. Blockchain technology could simplify storage and management of trusted information. It could provide easy access of such critical public sector information to the government agencies, while providing data security\cite{arbc2}. Blocks comprise of the data records. When these blocks are added to the chain, they become immutable. This means they cannot be deleted or changed by a single agency\cite{arbc2}. A consensus has to be reached by majority of the agencies for changing any record. Such a feature helps to maintain the security of the records by eliminating data corruption. Each block is verified and managed using some shared protocols. This process can be automated to allow ease of data entry.
+
+\subsubsection{Trust}
+In a supply chain no single agency is trusted to maintain the records. While all agencies must approve the contents of the record in order to avoid disputes. Therefore records should have time stamp and an origin proof. Normally a third party facilitates this requirement. Blockchains can provide an alternate solution, where agencies jointly manage the records and preventing corruption by a single agency\cite{arbc1}. 
+
+\subsubsection{Access}
+Blockchain technology enforces identical data to be stored by each agency. When one copy is updated, all the other copies are also updated. This eliminates the need of a third party to facilitate management of records\cite{arbc3}. Alternatively, different levels of read and write access could be provided to different agency. Although some meta data should be stored in the public ledger. 
+
+\subsubsection{Redundancy and Security}
+Blockchain also assist in providing security by disallowing redundancy at the same node. In the areas of logistics and inventory data, blockchain provides a new approach to supply chain management. The core logic of blockchain does not allow duplicate entries to be created in the same place\cite{arbc4}. An unique inventory can have a single entry with multiple updates, but not duplication. This prevents the agencies from creating fake date. In the example of a drug inventory, the shipment status for a batch of drugs will be updated for everyone, everywhere. Each entry could be tracked back to its origin\cite{arbc4}. 
+
+\subsubsection{Transparency}
+\cite{pabc1}.
+
+\subsection{Data Types in Blockchain}
+There are three major types of data stored on a blockchain, namely un-encrypted, encrypted and hashed\cite{arbc1}. All the agencies have read access to the un-encrypted data. Such data is fully transparent and facilitates immediate dispute resolution. The encrypted data can only be read by the agencies with the access to such data. This means an agency should have a decryption key to read to read the encrypted data. Encrypted data provides restricted access but is also stored in every node in the blockchain. In case of a dispute the decryption key could be used by different agencies to rectify the entry or deletion of any record. Hash data is also a hidden data, where hash keys act like fingerprints to represent changes or entry for any data record. Each agency can easily confirm their hash keys. Breaking the hash key is next to impossible. Only hash key is placed in the blockchain. The record data is stored off-chain by individual agencies. Data could be revealed, in case of a dispute, by the respective agency\cite{arbc1}.
+
+\subsection{Specialized Use Cases of Blockchain}
+\subsubsection{Counterfeit Detection}
+A specialized use case for blockchain in supply chain management could be the detection of counterfeits. These are the fraud duplicates of the original product that enter the supply chain. If a blockchain model is enforced on the supply chain, each batch of product can be tracked back to its origin. This means that each batch will have a block of code associated with it. If a batch does not have its presence in the blockchain, then it can be deemed as a counterfeit.  
+
+\subsubsection{Data Analysis}
+The data stored in each block can be used to 
+
+\section{The Opiod Crisis}
+MATT TO DO
+
+\section{A Blockchain Model for Opioid Distribution}
+MATT TO DO
+
+\section{CONCLUSION}
+
+Blockchain is a low cost solution for supply chain management. While providing security and transparency, it used digital data and communication. The computation and infrastructure cost for the entire model is low and can be easily tested before application.
+
+
+\section{figures}
+
+In Figure \ref{f:fly} we show a fly. Please note that because we use
+just columwidth that the size of the figure will change to the
+columnwidth of the paper once we change the layout to final. CHnaging
+the layout to final should not be done by you. All figures will be
+listed at the end.
+
+\begin{figure}[!ht]
+  \centering\includegraphics[width=\columnwidth]{images/fly.pdf}
+  \caption{Example caption}\label{f:fly}
+\end{figure}
+
+When copying the example, please do not check in the images from the
+examples into your images directory as you will not need them for your
+paper. Instead use images that you like to include. If you do not have
+any images, do not dreate the images folder.
+
+\section{Tables}
+
+In case you need to create tables, you can do this with online tools
+(if you do not mind sharing your data) such as
+\url{https://www.tablesgenerator.com/} or other such tools (please
+google for them). They even allow you to manage tables as CSV.
+
+or generate them by hand while using the provided template in Table\ref{t:mytable}. Not ethat
+the caption is before the tabular environment.
+
+\begin{table}[htb]
+\centering
+\caption{My caption}
+\label{t:mytabble}
+\begin{tabular}{lll}
+1 & 2 & 3 \\
+\hline
+4 & 5 & 6 \\
+7 & 8 & 9
+\end{tabular}
+\end{table}
+
+\section{Long example}
+
+If you like to see a more elaborate example, please look at
+report-long.tex. 
+
+\section{Conclusion}
+
+Put here an conclusion. Conlcusions and abstracts must not have any
+citations in the section.
+
+
+\begin{acks}
+
+  The authors would like to thank Dr. Gregor von Laszewski for his
+  support and suggestions to write this paper.
+
+\end{acks}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{report} 
+
+\appendix
+
+We include an appendix with common issues that we see when students
+submit papers. One particular important issue is not to use the
+underscore in bibtex labels. Sharelatex allows this, but the
+proceedings script we have does not allow this.
+
+When you submit the paper you need to address each of the items in the
+issues.tex file and verify that you have done them. Please do this
+only at the end once you have finished writing the paper. To d this
+cange TODO with DONE. However if you check something on with DONE, but
+we find you actually have not executed it correcty, you will receive
+point deductions. Thus it is important to do this correctly and not
+just 5 minutes before the deadline. It is better to do a late
+submission than doing the check in haste. 
+
+\input{issues}
+
+\end{document}
