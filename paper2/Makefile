@@ -2,6 +2,8 @@ FILE=report
 FLAGS=-interaction nonstopmode -halt-on-error -file-line-error 
 REVIEW=review
 DEFAULT=$(FILE)
+LATEX=pydflatex
+PDFLATEX=pdflatex
 
 UNAME := $(shell uname)
 
@@ -12,12 +14,140 @@ ifeq ($(UNAME), Linux)
 OPEN=xdg-open
 endif
 
-
 all:
+	$(LATEX) ${FILE} > tmp.log 2>&1
+	make -f Makefile bibtex > report-latex.log 2>&1 || true
+	$(LATEX) ${FILE} > tmp.log 2>&1
+	@echo  >> report-latex.log 2>&1
+	@echo "latex report" >> report-latex.log 2>&1
+	@echo "===========================================" >> report-latex.log 2>&1
+	@echo >> report-latex.log 2>&1
+	$(LATEX) ${FILE} >> report-latex.log 2>&1
+	make -f Makefile check >> report-latex.log 2>&1
+
+#	make -f Makefile quote-error >> report-latex.log 2>&1
+#	make -f Makefile yaml-error >> report-latex.log 2>&1
+#	make -f Makefile figure-check >> report-latex.log 2>&1
+#	make -f Makefile format-check >> report-latex.log 2>&1
+#	make -f Makefile none-ascii >> report-latex.log 2>&1
+#	make -f Makefile footnote-error >> report-latex.log 2>&1
+#	make -f Makefile wordcount-report >> report-latex.log 2>&1
+	cat report-latex.log
+
+simple:
+	pdflatex ${FLAGS} ${FILE} 
+	make -f Makefile bibtex
 	pdflatex ${FLAGS} ${FILE}
-	bibtex ${FILE}
-	pdflatex ${FLAGS} ${FILE}
-	pdflatex ${FLAGS} ${FILE}
+	pdflatex ${FLAGS} ${FILE} 
+
+
+check:
+	@wget -q https://raw.githubusercontent.com/bigdata-i523/sample-hid000/master/paper1/check.py -O check.py
+	@python check.py
+
+bibtex:
+	@echo 
+	@echo "bibtext report" 
+	@echo "===========================================" 
+	@echo 
+	@bibtex $(FILE)
+	@echo 
+	@echo "bibtext _ label error" 
+	@echo "===========================================" 
+	@echo 
+	@grep -nr "@" report.bib |fgrep _ | awk -F',' '{print $1}' |  sort -u 
+	@echo
+	@echo "bibtext space label error"
+	@echo "===========================================" 
+	@echo
+	@grep -nr "@" report.bib |fgrep " " | awk -F',' '{print $1}' | fgrep -v "url" | fgrep -v "@String" | fgrep -v "@Comment"|  sort -u
+	@echo
+	@echo "bibtext comma label error"
+	@echo "===========================================" 
+	@echo
+	@grep -nr "@" report.bib | fgrep -v "@String" | fgrep -v "@Comment"| fgrep -v ',' | sort -u 
+
+footnote-error:	
+	@echo ""
+	@echo "footnote error"
+	@echo "====================="
+	@echo ""
+	@grep  -nr 'footnote' report.tex |sort -u || true
+
+wordcount-report:
+	@echo ""
+	@echo "wordcount report"
+	@echo "====================="
+	@echo ""
+	@wc -w report.tex || true
+	@echo '   ' $(shell ps2ascii report.pdf | wc -w) 'report.pdf'
+	@wc -w report.bib || true
+
+quote-error:
+	@echo ""
+	@echo "latex quote error"
+	@echo "====================="
+	@echo ""
+	@grep  -nr '"' report.tex |sort -u || true
+
+yaml-error:
+	@echo
+	@echo "yaml error"
+	@echo "====================="
+	@echo
+	@yamllint ../README.yml || true
+
+format-check:
+	@echo 
+	@echo "format check"
+	@echo "===========================================" 
+	@echo
+	@echo "if input/i523 is found it is correct (1=ok 0=wrong):"
+	@grep -nr "format/i523" report.tex |wc -l || true
+
+figure-check:
+	@echo 
+	@echo "figure check"
+	@echo "===========================================" 
+	@echo 
+	@echo "Number of figures:"
+	@grep -nr "begin{figure" report.tex  |wc -l
+	@echo "Number of Tables:"
+	@grep -nr "begin{table" report.tex  |wc -l
+	@echo "Number of label:"
+	@grep -nr "label{" report.tex  |wc -l
+	@echo "Number of ref:"
+	@grep -nr "ref{" report.tex  |wc -l
+	@grep -nr "igure 1" report.tex || true
+	@grep -nr "igure 2" report.tex || true
+	@fgrep -nr  "igure 3" report.tex || true 
+	@grep -nr "igure 4" report.tex  ||true
+	@grep -nr "able 1" report.tex ||true
+	@grep -nr "able 2" report.tex ||true
+	@grep -nr "able 3" report.tex ||true
+	@grep -nr "able 4" report.tex ||true
+
+none-ascii:
+	@echo 
+	@echo "non ascii check report.tex"
+	@echo "===========================================" 
+	@echo ""
+	@echo "this check is not perfect"
+	@echo ""
+	@perl -ane '{ if(m/[[:^ascii:]]/) { print  } }' report.tex || true
+	@echo 
+	@echo "non ascii check report.bib"
+	@echo "===========================================" 
+	@echo ""
+	@echo "this check is not perfect"
+	@echo ""
+	@perl -ane '{ if(m/[[:^ascii:]]/) { print  } }' report.bib || true
+
+# @grep -n -P "[^|a-zA-Z\{\}\s%\./\-:;,0-9@=\\\\\"'\(\)_~\$\!&\`\?+#\^<>\[\]\*]" report.tex || true
+# @grep -n -P "[^|a-zA-Z\{\}\s%\./\-:;,0-9@=\\\\\"'\(\)_~\$\!&\`\?+#\^<>\[\]\*]" report.bib || true
+
+#@echo
+#./check-yaml.py
 
 #review-create:
 #	cp -i report.tex review.tex
@@ -26,7 +156,7 @@ all:
 
 insert:
 	rm  -f bibtex-error.tex
-	echo '\\section{Bibtex Issues}' > bibtex-error.tex
+	@echo '\\section{Bibtex Issues}' > bibtex-error.tex
 	bibtex -terse ${REVIEW} | sed -e 's/^/\\todo[inline]{/'  | sed -e 's/.*/&}/'  >> bibtex-error.tex
 	sed 's/^\\end{document}/\\input{bibtex-error}\\input{issues}\\end{document}/g' < ${REVIEW}.tex > tmp.tex
 	mv tmp.tex ${REVIEW}.tex
@@ -47,13 +177,13 @@ review:
 	rm -rf ~/tmp-review
 
 review-pdf:
-	pdflatex ${FLAGS} ${REVIEW}
+	$(PDFLATEX) ${FLAGS} ${REVIEW}
 	bibtex ${REVIEW}
 	make -f Makefile insert
-	pdflatex ${FLAGS} ${REVIEW}
+	$(PDFLATEX) ${FLAGS} ${REVIEW}
 	bibtex ${REVIEW}
-	pdflatex ${FLAGS} ${REVIEW}
-	pdflatex ${FLAGS} ${REVIEW}
+	$(PDFLATEX) ${FLAGS} ${REVIEW}
+	$(PDFLATEX) ${FLAGS} ${REVIEW}
 	bibtex -terse ${REVIEW} | sed -e 's/^/\* [ ] /' 
 
 pack:
