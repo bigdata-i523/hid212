@@ -19,6 +19,6 @@ paper1:
        'search'.
    url: https://github.com/bigdata-i523/hid212/paper1/report.pdf
    type: latex
-   status: Nov 13 17 100%
+   status: Nov 14 17 100%
    chapter: Technology
 ```
