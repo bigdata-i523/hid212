@@ -29,7 +29,8 @@ paper2:
         This paper reviews the history and current status of blockchain and investigates use cases for 
         how blockchain can transform healthcare and supply chain. 
     author:
-        - Kumar, Saurabh; Schwartzer, Matthew; Hotz, Nicholas 
+        - Kumar, Saurabh; Schwartzer, Matthew; Hotz, Nicholas
+    chapter: Business
     hid:
         - 212, 225, 210
     status: Nov 20 17 100%
