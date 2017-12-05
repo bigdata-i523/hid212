@@ -1,2 +1,9 @@
 
 Contains the final project report.
+
+Python packages needed:
+numpy
+pandas
+matplotlib
+hashlib
+datetime
