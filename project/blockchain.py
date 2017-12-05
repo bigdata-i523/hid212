@@ -17,7 +17,11 @@ import pandas as pd
 import random
 from datetime import datetime
 from datetime import timedelta
+import matplotlib.pyplot as plt
+%matplotlib inline
 
+
+#Define a blockchain class
 class Block:
     def __init__(self, index, timestamp, data, previous_hash):
         self.index = index
@@ -32,11 +36,13 @@ class Block:
         return sha.hexdigest()
 
 
+#Function to define genesis block
 def create_genesis_block():
     data = ['rawmaterial_supplier','manufacturer_id','manufacturer_t1','manufacturer_t2','smanufacturer_id','smanufacturer_t1','smanufacturer_t2','warehouse_id','warehouse_t1','warehouse_t2','distributer_id','distributer_t1','distributer_t2','pharmacy_id','pharmacy_t1','pharmacy_t2','prescriber_id','patient_id','zipcode','pharmacy_returntime','distributer_returntime', 'warehouse_returntime']
     return Block(0, date.datetime.now(), data, "0")
 
 
+#Funtion to add a new block
 def next_block(last_block,data):
     
     this_index = last_block.index + 1
@@ -54,6 +60,8 @@ def next_block(last_block,data):
 blockchain = [create_genesis_block()]
 previous_block = blockchain[0]
 
+time1 = date.datetime.now()
+
 # Number of blocks to add
 num_of_blocks_to_add = 2000
 
@@ -61,6 +69,7 @@ num_of_blocks_to_add = 2000
 hashes = []
 
 
+# Function to create data
 data = ['rawmaterial_supplier','manufacturer_id','manufacturer_t1','manufacturer_t2','smanufacturer_id','smanufacturer_t1','smanufacturer_t2','warehouse_id','warehouse_t1','warehouse_t2','distributer_id','distributer_t1','distributer_t2','pharmacy_id','pharmacy_t1','pharmacy_t2','prescriber_id','patient_id','zipcode','pharmacy_returntime','distributer_returntime', 'warehouse_returntime']
 supply_chain_data = pd.DataFrame(columns= data)
 
@@ -183,6 +192,8 @@ def create_data(supply_chain_data):
 supply_chain_data = create_data(supply_chain_data)
 supply_chain_data.to_csv("supply_chain_data.csv",index=False)
 
+
+#Function to add blocks to the blockchain
 def add_block(supply_chain_data,previous_block,hashes,num_of_blocks_to_add):
     
     s = np.random.normal(0.125, .25, num_of_blocks_to_add)
@@ -202,7 +213,12 @@ def add_block(supply_chain_data,previous_block,hashes,num_of_blocks_to_add):
     
 add_block(supply_chain_data,previous_block,hashes,num_of_blocks_to_add)
 
+print ("BlockChain class\n", blockchain[0:4])
+print ("BlockChain data for 1012th block\n")
+print (blockchain[1012].data)
 
+
+#Creating hash table for security
 creation_time = [i.timestamp for i in blockchain]
 block_index = [i.index for i in blockchain]
 previous_hash = [i.previous_hash for i in blockchain]
@@ -213,5 +229,104 @@ df1 = df1.transpose()
 df1.columns = ["block_index","previous_hash","creation_time"]
 df1.to_csv("hash_table.csv",index=False)
 print ("Hash Table created")
+
+
+#Function to Update a block
+def block_update(block_id, key, timestamp):
+    
+    print ("Hash Key for 1500 block: ",blockchain[block_id].previous_hash)
+    
+    if (blockchain[block_id].previous_hash == key):
+        blockchain[block_id].timestamp = timestamp
+        print ("Block #{} has been updated".format(block_id))
+        
+    else:
+        print ("The key did not match")
+
+
+# Reading the hash table before updating
+hash_table = pd.read_csv("hash_table.csv")
+
+#Update the timestamp for 1500th block
+#Calling the block update function
+block_id = 1500
+key = hash_table.previous_hash[1500]
+timestamp = date.datetime.now() - timedelta(days=2)
+
+print ("Key from hash table: ", key)
+block_update(block_id, key, timestamp)
+
+
+#Analysis
+#1. Finding Number of Opioid Batches sold Each Year
+sales_yearly = []
+count = 0
+for i in supply_chain_data.pharmacy_t2:
+    if i:
+        #print i.date
+        sales_yearly.append(str(i.year))
+        count=count+1
+    else:
+        sales_yearly.append('')
+        count=count+1
+
+plt.hist(sales_yearly,bins = 13, rwidth = 0.75,color = "skyblue")
+plt.title('Number of Opioid Batches sold Each Year')
+plt.xlabel('Year')
+plt.ylabel('Count')
+plt.savefig('./images/yearly_batch_count_hist.png')
+plt.show()
+
+
+#2. Finding Number of Prescriptions by each Doctor/Physician
+plt.hist(supply_chain_data.prescriber_id,bins = 4, rwidth = 0.75,color = "purple")
+plt.title('Number of Prescriptions by each Doctor/Physician')
+plt.xlabel('Doctor Id')
+plt.ylabel('Count')
+plt.savefig('./images/prescriptions_hist.png')
+plt.show()
+
+
+#3. Number of Buyers by Each Zipcode
+plt.hist(supply_chain_data.zipcode,bins = 4, rwidth = 0.75,color = "yellowgreen")
+plt.title('Number of Buyers by Each Zipcode')
+plt.xlabel('Zipcode')
+plt.ylabel('Count')
+plt.savefig('./images/zipcode_hist.png')
+plt.show()
+
+
+#4. Average Number of Days Opioid Stocked
+def avg(a):
+    return (sum(a)/len(a))
+
+manufacturer_days = []
+smanufacturer_days = []
+pharmacy_days = []
+warehouse_days = []
+distributer_days = []
+
+for i in range(2000):
+    
+    distributer_days.append((supply_chain_data.distributer_t2[1] - supply_chain_data.distributer_t1[1]).days)
+    manufacturer_days.append((supply_chain_data.manufacturer_t2[1] - supply_chain_data.manufacturer_t1[1]).days)
+    smanufacturer_days.append((supply_chain_data.smanufacturer_t2[1] - supply_chain_data.smanufacturer_t1[1]).days)
+    pharmacy_days.append((supply_chain_data.pharmacy_t2[1] - supply_chain_data.pharmacy_t1[1]).days)
+    warehouse_days.append((supply_chain_data.warehouse_t2[1] - supply_chain_data.warehouse_t1[1]).days)
+
+avg_list = [avg(manufacturer_days), avg(smanufacturer_days),avg(warehouse_days),avg(distributer_days),avg(pharmacy_days)]
+plt.title('Average Number of Days Opioid Stocked')
+plt.xlabel('Stages')
+plt.xticks(range(5),['manufacturer', 'smanufacturer', 'warehouse', 'distributer', 'pharmacy'])
+plt.ylabel('Count')
+plt.plot(avg_list,color = "green")
+plt.savefig('./images/average_hist.png')
+plt.show()
+
+time2 = date.datetime.now()
+min = (time2-time1).total_seconds()/60.0
+
+print ("Runtime in minutes: ", min)
+
 
 
