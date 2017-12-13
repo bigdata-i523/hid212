@@ -4,6 +4,7 @@ owner:
     name: Kumar, Saurabh
     url: https://github.com/bigdata-i523/hid212
 paper1:
+    exclude: True
     abstract: >
         With the amount of data created everyday reaching exorbitant limits
         and a push for analysis across all major fields gaining traction, we need
