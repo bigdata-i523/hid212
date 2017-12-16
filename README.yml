@@ -19,7 +19,6 @@ paper1:
         - 212
     status: Nov 14 17 100%
     title: Big Data Analysis using MapReduce
-    type: latex
     url: https://github.com/bigdata-i523/hid212/paper1/report.pdf
 paper2:
     review: Nov 6 2017
@@ -36,7 +35,6 @@ paper2:
         - 212, 225, 210
     status: Nov 26 17 100%
     title: Can Blockchain Adoption Mitigate the Opioid Crisis Through More Secure Drug Distribution?
-    type: latex
     url: https://github.com/bigdata-i523/hid212/paper2/report.pdf
 project:
     review: Dec 4 2017
